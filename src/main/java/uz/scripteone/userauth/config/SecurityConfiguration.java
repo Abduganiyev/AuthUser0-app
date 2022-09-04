@@ -19,6 +19,25 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
     private final MyUserService myUserService;
 
+    private static final String[] WHITE_LIST = {
+            "/api/public/**",
+            "/api/public/auth/login",
+            "/api/v1/houses/list",
+            "/api/v1/categories/list",
+            "/api/v1/categories",
+            // -- Swagger UI v2
+            "/v2/api-docs",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**",
+            // -- Swagger UI v3 (OpenAPI)
+            "/v3/api-docs/**",
+            "/swagger-ui/**"
+    };
+
     @Autowired
     public SecurityConfiguration(@Lazy MyUserService myUserService) {
         this.myUserService = myUserService;
@@ -34,7 +53,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/v1/auth/**").permitAll()
+                .antMatchers(WHITE_LIST).permitAll()
                 .anyRequest()
                 .authenticated();
     }
