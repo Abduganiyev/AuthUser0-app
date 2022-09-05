@@ -50,7 +50,7 @@ public class SpringFoxConfig {
                 .license("Apache version 2.0")
                 .version("1.1.0")
                 .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0.html")
-                .contact(new Contact("Digital One", "www.digitalone.uz", "gm.khamza@gmail.com"))
+                .contact(new Contact("Script One", "www.scriptone.uz", "gm.khamza@gmail.com"))
                 .build();
     }
 
