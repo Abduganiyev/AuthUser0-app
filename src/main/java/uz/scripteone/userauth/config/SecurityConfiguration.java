@@ -20,6 +20,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     private final MyUserService myUserService;
 
     private static final String[] WHITE_LIST = {
+            "/api/public/**",
             // -- Swagger UI v2
             "/v2/api-docs",
             "/swagger-resources",

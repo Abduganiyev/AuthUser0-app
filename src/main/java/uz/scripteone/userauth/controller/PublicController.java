@@ -15,18 +15,18 @@ import uz.scripteone.userauth.service.impl.MyUserService;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/api/public")
 @RequiredArgsConstructor
-public class AuthController {
+public class PublicController {
     private final MyUserService myUserService;
 
-    @PostMapping("/register")
+    @PostMapping("/auth/register")
     public HttpEntity<?> register(@Valid @RequestBody RegisterDto dto) {
         Response response = myUserService.register(dto);
         return ResponseEntity.status(response.isSuccess() ? 200 : 500).body(response);
     }
 
-    @PostMapping("/login")
+    @PostMapping("/auth/login")
     public HttpEntity<?> login(@Valid @RequestBody LoginDto dto) {
         Response response = myUserService.login(dto);
         return ResponseEntity.status(response.isSuccess() ? 200 : 500).body(response);

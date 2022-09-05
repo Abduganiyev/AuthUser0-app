@@ -45,7 +45,7 @@ public class SpringFoxConfig {
     }
 
     private ApiInfo metadata() {
-        return new ApiInfoBuilder().title("API Endpoints for Houzing Web App")
+        return new ApiInfoBuilder().title("API Endpoints for ScripOne Web App")
                 .description("This project is a real estate e-commerce website")
                 .license("Apache version 2.0")
                 .version("1.1.0")
