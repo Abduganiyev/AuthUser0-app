@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import uz.scripteone.userauth.entity.Attachment;
 import uz.scripteone.userauth.exception.FileNotFoundException;
-import uz.scripteone.userauth.exception.FileStorageException;
 import uz.scripteone.userauth.repository.AttachmentRepository;
 import uz.scripteone.userauth.service.FileStorageService;
 
@@ -23,7 +22,7 @@ public class FileStorageServiceImp implements FileStorageService {
     public Attachment uploadFileToDB(MultipartFile multipartFile) throws IOException {
         String originalFilename = multipartFile.getOriginalFilename();
         if (originalFilename.contains(".."))
-            throw new FileStorageException("Uzur"+originalFilename);
+            throw new FileNotFoundException("Uzur"+originalFilename);
 
         String uniqueFilename = System.currentTimeMillis() + "_" + originalFilename;
 

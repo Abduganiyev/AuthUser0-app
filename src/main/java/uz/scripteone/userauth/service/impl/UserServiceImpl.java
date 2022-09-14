@@ -6,7 +6,8 @@ import org.springframework.stereotype.Service;
 import uz.scripteone.userauth.dto.UserCreateDto;
 import uz.scripteone.userauth.entity.Role;
 import uz.scripteone.userauth.entity.User;
-import uz.scripteone.userauth.exception.NotFoundException;
+import uz.scripteone.userauth.exception.BadRequestException;
+import uz.scripteone.userauth.exception.FileNotFoundException;
 import uz.scripteone.userauth.repository.RoleRepository;
 import uz.scripteone.userauth.repository.UserRepository;
 import uz.scripteone.userauth.service.UserService;
@@ -32,7 +33,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUserById(Long userId) {
         return userRepository.findById(userId)
-                .orElseThrow(() -> new NotFoundException("Not Found User with ID: " + userId));
+                .orElseThrow(() -> new FileNotFoundException("Not Found User with ID: " + userId));
     }
 
 
@@ -67,7 +68,7 @@ public class UserServiceImpl implements UserService {
                     Role role = byId.get();
                     newRoleSet.add(role);
                 } else {
-                    throw new NotFoundException("Not Found Role with ID: " + byId);
+                    throw new BadRequestException("Not Found Role with ID: " + byId);
                 }
             }
 
@@ -77,7 +78,7 @@ public class UserServiceImpl implements UserService {
 
             return userRepository.save(user);
         }
-        throw new NotFoundException("Not Found User with ID: " + userId);
+        throw new BadRequestException("Not Found User with ID: " + userId);
     }
 
     @Override
