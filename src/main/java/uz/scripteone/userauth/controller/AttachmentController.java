@@ -1,3 +1,4 @@
+/*
 package uz.scripteone.userauth.controller;
 
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,7 @@ public class AttachmentController {
 
     @PostMapping(value = "/upload_files", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     private List<UploadFileResponse> uploadFilesToDB(@RequestParam("files") List<MultipartFile> multipartFiles) throws IOException {
+*/
 /*        List<Attachment> uploadFiles = fileStorageService.uploadFilesToDB(multipartFiles);
 
         List<UploadFileResponse> responseList = new ArrayList<>();
@@ -40,7 +42,8 @@ public class AttachmentController {
             UploadFileResponse response = new UploadFileResponse(uploadFile.getOriginalName(), downloadUrl, uploadFile.getContentType(), uploadFile.getSize());
             responseList.add(response);
         }
-        return responseList;*/
+        return responseList;*//*
+
 
         List<UploadFileResponse> uploadFileResponseList = new ArrayList<>();
         for (MultipartFile multipartFile : multipartFiles) {
@@ -75,3 +78,4 @@ public class AttachmentController {
         return fileStorageService.deleteById(id);
     }
 }
+*/

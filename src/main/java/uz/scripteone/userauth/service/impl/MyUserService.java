@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
+/*import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;*/
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Errors;
@@ -25,7 +25,7 @@ import uz.scripteone.userauth.entity.Role;
 import uz.scripteone.userauth.entity.User;
 import uz.scripteone.userauth.repository.RoleRepository;
 import uz.scripteone.userauth.repository.UserRepository;
-import uz.scripteone.userauth.security.JwtProvider;
+/*import uz.scripteone.userauth.security.JwtProvider;*/
 
 import java.time.Instant;
 import java.util.*;
@@ -35,36 +35,49 @@ import java.util.*;
 @RequiredArgsConstructor
 @Slf4j
 @Transactional
-public class MyUserService implements UserDetailsService {
+public class MyUserService/* implements UserDetailsService*/ {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-    private final PasswordEncoder passwordEncoder;
-    private final AuthenticationManager authenticationManager;
-    private final JwtProvider jwtProvider;
-
+/*    private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;*/
+    //private final JwtProvider jwtProvider;
+/*
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("Username Not Found"));
-    }
+    }*/
 
     public HttpEntity<?> register(RegisterDto dto) {
         User user = new User();
         user.setFirstname(dto.getFirstname());
         user.setLastname(dto.getLastname());
         user.setEmail(dto.getEmail());
+        user.setDataOfBirth(dto.getDataOfBirth());
+        user.setPreferredBranch(dto.getPreferredBranch());
+        user.setEnglishLevel(dto.getEnglishLevel());
+        user.setRegion(dto.getRegion());
+        user.setAddress(dto.getAddress());
+        user.setParentFullName(dto.getParentFullName());
+        user.setParentMobile(dto.getParentMobile());
 
+/*
         Set<Role> roleSet = new HashSet<>();
         for (Long roleId : dto.getRoleIdSet()) {
             Optional<Role> roleOptional = roleRepository.findById(roleId);
             roleOptional.ifPresent(roleSet::add);
         }
         user.setRoles(roleSet);
-        user.setPassword(passwordEncoder.encode(dto.getPassword()));
+*/
 
         User save = userRepository.save(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(user.getEmail());
+        return ResponseEntity.status(HttpStatus.CREATED).body("Successful Posted");
     }
 
+    public HttpEntity<?> findAll() {
+        List<User> userList = userRepository.findAll();
+        return ResponseEntity.status(HttpStatus.OK).body(userList);
+    }
+/*
     Long EXPIRATION_TIME = 18_000_000L;
     public HttpEntity<?> login(LoginDto dto) {
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(dto.getEmail(), dto.getPassword()));
@@ -90,5 +103,5 @@ public class MyUserService implements UserDetailsService {
             errorList.put(code, error.getDefaultMessage());
         }
         return errorList;
-    }
+    }*/
 }

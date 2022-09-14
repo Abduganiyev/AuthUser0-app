@@ -1,3 +1,4 @@
+/*
 package uz.scripteone.userauth.config;
 
 import org.springframework.context.annotation.Bean;
@@ -13,3 +14,4 @@ public class AuditingConfig {
         return new SecurityAuditingConfig();
     }
 }
+*/

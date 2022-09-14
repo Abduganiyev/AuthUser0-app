@@ -1,3 +1,4 @@
+/*
 package uz.scripteone.userauth.security;
 
 import lombok.AllArgsConstructor;
@@ -40,3 +41,4 @@ public class JwtFilter extends OncePerRequestFilter {
         filterChain.doFilter(httpServletRequest,httpServletResponse);
     }
 }
+*/

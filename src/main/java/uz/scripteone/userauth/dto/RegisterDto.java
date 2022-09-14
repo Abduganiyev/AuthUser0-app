@@ -8,6 +8,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Set;
 
 @Data
@@ -30,8 +32,22 @@ public class RegisterDto {
     private String email;
 
     @NotNull
-    private String password;
+    private LocalDate dataOfBirth;
 
     @NotNull
-    private Set<Long> roleIdSet;
+    private String preferredBranch;
+
+    @NotNull
+    private String englishLevel;
+
+    @NotNull
+    private String region;
+
+    private String address;
+
+    private String parentFullName;
+
+    private String parentMobile;
+
+
 }

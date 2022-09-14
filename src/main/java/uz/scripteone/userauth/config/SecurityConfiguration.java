@@ -1,3 +1,4 @@
+/*
 package uz.scripteone.userauth.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,3 +75,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
         return new BCryptPasswordEncoder();
     }
 }
+*/
