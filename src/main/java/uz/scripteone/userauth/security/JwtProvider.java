@@ -1,3 +1,4 @@
+/*
 package uz.scripteone.userauth.security;
 
 
@@ -36,3 +37,4 @@ public class JwtProvider {
         return username ;
     }
 }
+*/

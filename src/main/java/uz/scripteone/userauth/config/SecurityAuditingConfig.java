@@ -1,3 +1,4 @@
+/*
 package uz.scripteone.userauth.config;
 
 import org.springframework.data.domain.AuditorAware;
@@ -18,3 +19,4 @@ public class SecurityAuditingConfig implements AuditorAware<Long> {
         return Optional.empty();
     }
 }
+*/

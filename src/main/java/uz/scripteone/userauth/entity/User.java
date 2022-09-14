@@ -4,11 +4,13 @@ package uz.scripteone.userauth.entity;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+/*import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;*/
 import uz.scripteone.userauth.entity.template.AbcEntity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
@@ -21,7 +23,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "users")
-public class User extends AbcEntity implements UserDetails, CommandLineRunner {
+public class User extends AbcEntity /*implements UserDetails, CommandLineRunner*/ {
 
     @Column(nullable = false)
     private String firstname;
@@ -33,20 +35,47 @@ public class User extends AbcEntity implements UserDetails, CommandLineRunner {
     private String email;
 
     @Column(nullable = false)
-    private String password;
+    private LocalDate dataOfBirth;
 
+    @Column(nullable = false)
+    private String preferredBranch;
+
+    @Column(nullable = false)
+    private String englishLevel;
+
+    @Column(nullable = false)
+    private String region;
+
+    private String address;
+
+    private String parentFullName;
+
+    private String parentMobile;
+
+/*
+    @Column(nullable = false)
+    private String password;
+*/
+
+/*
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles = new HashSet<>();
+*/
 
+/*
     @Override
     public void run(String... args) throws Exception {
 
-    }
 
-    private boolean accountNonExpired = true;
+    }*/
+
+/*    private boolean accountNonExpired = true;
     private boolean accountNonLocked = true;
     private boolean credentialsNonExpired = true;
-    private boolean enabled = true;
+    private boolean enabled = true;*/
+
+
+/*
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -77,6 +106,7 @@ public class User extends AbcEntity implements UserDetails, CommandLineRunner {
     public boolean isEnabled() {
         return this.enabled;
     }
+*/
 
     @Override
     public boolean equals(Object o) {
