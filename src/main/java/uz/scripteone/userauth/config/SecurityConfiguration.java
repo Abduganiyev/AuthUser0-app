@@ -9,8 +9,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import uz.scripteone.userauth.security.JwtFilter;
 import uz.scripteone.userauth.service.impl.MyUserService;
 
 @Configuration
@@ -18,8 +21,10 @@ import uz.scripteone.userauth.service.impl.MyUserService;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
     private final MyUserService myUserService;
+    private final JwtFilter jwtFilter;
 
     private static final String[] WHITE_LIST = {
+            "/api/attachment/**",
             "/api/public/**",
             // -- Swagger UI v2
             "/v2/api-docs",
@@ -35,8 +40,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     };
 
     @Autowired
-    public SecurityConfiguration(@Lazy MyUserService myUserService) {
+    public SecurityConfiguration(@Lazy MyUserService myUserService,
+                                 @Lazy JwtFilter jwtFilter) {
         this.myUserService = myUserService;
+        this.jwtFilter = jwtFilter;
     }
 
     @Override
@@ -52,6 +59,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                 .antMatchers(WHITE_LIST).permitAll()
                 .anyRequest()
                 .authenticated();
+        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
     @Bean
