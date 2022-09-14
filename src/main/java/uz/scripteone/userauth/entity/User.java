@@ -3,6 +3,7 @@ package uz.scripteone.userauth.entity;
 
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import uz.scripteone.userauth.entity.template.AbcEntity;
@@ -20,7 +21,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "users")
-public class User extends AbcEntity implements UserDetails{
+public class User extends AbcEntity implements UserDetails, CommandLineRunner {
 
     @Column(nullable = false)
     private String firstname;
@@ -34,8 +35,13 @@ public class User extends AbcEntity implements UserDetails{
     @Column(nullable = false)
     private String password;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles = new HashSet<>();
+
+    @Override
+    public void run(String... args) throws Exception {
+
+    }
 
     private boolean accountNonExpired = true;
     private boolean accountNonLocked = true;

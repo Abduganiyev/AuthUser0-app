@@ -3,6 +3,7 @@ package uz.scripteone.userauth.entity;
 
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.core.GrantedAuthority;
 import uz.scripteone.userauth.entity.template.AbcEntity;
 
@@ -16,7 +17,7 @@ import java.util.Objects;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Role extends AbcEntity implements GrantedAuthority{
+public class Role extends AbcEntity implements GrantedAuthority {
 
     @Column(nullable = false, unique = true)
     private String name;
